@@ -1,7 +1,7 @@
 import requests
 from pet.endpoints_heandler import Endpoint
 
-class CreatePet(Endpoint):
+class PutPet(Endpoint):
     pet_id = None
     category_id = None
     category_name = None
@@ -10,28 +10,28 @@ class CreatePet(Endpoint):
     tags = []
     pet_status = None
 
-    def create_pet(self, id_random, string_random, random_pet_status):
-        response = requests.post(
+    def put_pet(self, pet_id, id_random, string_random, random_pet_status):
+        response = requests.put(
             'https://petstore.swagger.io/v2/pet',
             headers={'Content-Type': 'application/json'},
             json={
-                  "id": id_random,
-                  "category": {
+                "id": pet_id,
+                "category": {
                     "id": id_random,
                     "name": string_random
-                  },
-                  "name": string_random,
-                  "photoUrls": [
-                      string_random
-                  ],
-                  "tags": [
+                },
+                "name": string_random,
+                "photoUrls": [
+                    string_random
+                ],
+                "tags": [
                     {
-                      "id": id_random,
-                      "name": string_random
+                        "id": id_random,
+                        "name": string_random
                     }
-                  ],
-                  "status": random_pet_status
-                }
+                ],
+                "status": random_pet_status
+            }
         )
         self.status = response.status_code
         self.pet_id = response.json()['id']
@@ -43,7 +43,7 @@ class CreatePet(Endpoint):
         self.pet_status = response.json()['status']
         return response
 
-    def check_id_same_as_sent(self, expected_id):
+    def check_check_that_the_id_match(self, expected_id):
         assert self.pet_id == expected_id
 
     def check_category_is_correct_id_and_name(self, expected_id, expected_name):
