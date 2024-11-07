@@ -1,9 +1,17 @@
+from datetime import datetime
+
 import pytest
 import random
 import string
 from pet.create_pet import CreatePet
+from pet.delete_pet import DeletePet
+from pet.get_findByStatus import GetPetByStatus
+from pet.get_pet import GetPet
+from pet.post_pet_petid import PostPetPetid
 from pet.put_pet import PutPet
 from pet.upload_Image import UploadImage
+from store.post_order import PostOrder
+
 
 @pytest.fixture()
 def pet_creator_endp():
@@ -18,16 +26,45 @@ def put_pet_endp():
     return PutPet()
 
 @pytest.fixture()
+def pet_get_endp():
+    return GetPet()
+
+@pytest.fixture()
+def post_pet_petid_endp():
+    return PostPetPetid()
+
+@pytest.fixture()
+def status_get_status_endp():
+    return GetPetByStatus()
+
+@pytest.fixture()
+def delete_pet_endp():
+    return DeletePet()
+
+@pytest.fixture()
+def post_order_endp():
+    return PostOrder()
+
+@pytest.fixture()
 def random_string(length=8):
     return ''.join(random.choices(string.ascii_letters, k=length))
 
 @pytest.fixture()
 def random_id():
-    return random.randint(1, 10000)
+    return random.randint(1, 1000)
 
 @pytest.fixture()
 def random_pet_status():
     return random.choice(['available', 'pending', 'sold'])
+
+@pytest.fixture()
+def current_ship_date():
+    ship_date = datetime.utcnow().isoformat() + 'Z'
+    return ship_date
+
+@pytest.fixture()
+def random_id_order():
+    return random.randint(1, 10)
 
 @pytest.fixture()
 def create_pet_for_test(pet_creator_endp, random_string, random_id, random_pet_status):

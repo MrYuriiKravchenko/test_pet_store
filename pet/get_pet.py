@@ -1,37 +1,12 @@
 import requests
 from pet.endpoints_heandler import Endpoint
 
-class CreatePet(Endpoint):
+class GetPet(Endpoint):
     pet_id = None
-    category_id = None
-    category_name = None
-    name = None
-    photo_urls = []
-    tags = []
-    pet_status = None
-
-    def create_pet(self, id_random, string_random, random_pet_status):
-        response = requests.post(
-            'https://petstore.swagger.io/v2/pet',
+    def get_pet(self, pet_id):
+        response = requests.get(
+            f'https://petstore.swagger.io/v2/pet/{pet_id}',
             headers={'Content-Type': 'application/json'},
-            json={
-                  "id": id_random,
-                  "category": {
-                    "id": id_random,
-                    "name": string_random
-                  },
-                  "name": string_random,
-                  "photoUrls": [
-                      string_random
-                  ],
-                  "tags": [
-                    {
-                      "id": id_random,
-                      "name": string_random
-                    }
-                  ],
-                  "status": random_pet_status
-                }
         )
         self.status = response.status_code
         self.pet_id = response.json()['id']
