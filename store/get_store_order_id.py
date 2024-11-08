@@ -1,26 +1,16 @@
 import requests
 from store.endpoints_heandler import Endpoint
 
-class PostOrder(Endpoint):
+class GetStoreOrderId(Endpoint):
     order_id = None
-    pet_Id = None
+    pet_id = None
     quantity_pet = None
     ship_date = None
-    status_order = None
-    complete_order = None
 
-    def post_order(self, random_id, random_id_order, current_ship_date):
-        response = requests.post(
-            'https://petstore.swagger.io/v2/store/order',
-            headers={'Content-Type': 'application/json'},
-            json={
-                  "id": random_id_order,
-                  "petId": random_id,
-                  "quantity": random_id,
-                  "shipDate": current_ship_date,
-                  "status": "placed",
-                  "complete": True
-                }
+
+    def get_order_id(self, order_id):
+        response = requests.get(
+            f'https://petstore.swagger.io/v2/store/order/{order_id}'
         )
         self.status = response.status_code
         self.order_id = response.json()['id']
@@ -48,4 +38,3 @@ class PostOrder(Endpoint):
 
     def check_complete_order(self):
         assert self.complete_order == True
-
