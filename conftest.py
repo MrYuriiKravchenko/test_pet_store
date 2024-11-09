@@ -13,6 +13,8 @@ from store.delete_order_id import Delete
 from store.get_store_inventory import GetInventory
 from store.get_store_order_id import GetStoreOrderId
 from store.post_order import PostOrder
+from user.post_createwishlist import PostCreateWishlist
+from user.post_createwitharray import PostCreateWishArray
 
 
 @pytest.fixture()
@@ -60,6 +62,14 @@ def delete_oreder_is_endp():
     return Delete()
 
 @pytest.fixture()
+def post_createwishlist_endp():
+    return PostCreateWishlist()
+
+@pytest.fixture()
+def post_createwisharrey_endp():
+    return PostCreateWishArray()
+
+@pytest.fixture()
 def random_string(length=8):
     return ''.join(random.choices(string.ascii_letters, k=length))
 
@@ -81,6 +91,23 @@ def random_id_order():
     return random.randint(1, 10)
 
 @pytest.fixture()
+def radom_email():
+    domain = random.choice(['example.com', 'test.com','mail.com'])
+    return f"{''.join(random.choices(string.ascii_lowercase, k=8))}@{domain}"
+
+@pytest.fixture()
+def random_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choices(characters, k=length))
+
+@pytest.fixture()
+def random_phone():
+    country_code = "+7"
+    operator_code = random.randint(900, 999)
+    number = ''.join([str(random.randint(0, 9)) for _ in range(7)])
+    return f"{country_code}{operator_code}{number}"
+
+@pytest.fixture()
 def create_pet_for_test(pet_creator_endp, random_string, random_id, random_pet_status):
     pet_creator_endp.create_pet(random_id, random_string, random_pet_status)
     return pet_creator_endp
@@ -89,3 +116,4 @@ def create_pet_for_test(pet_creator_endp, random_string, random_id, random_pet_s
 def create_order_for_test(post_order_endp, random_id, random_id_order, current_ship_date):
     post_order_endp.post_order(random_id, random_id_order, current_ship_date)
     return post_order_endp
+
