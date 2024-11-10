@@ -13,8 +13,11 @@ from store.delete_order_id import Delete
 from store.get_store_inventory import GetInventory
 from store.get_store_order_id import GetStoreOrderId
 from store.post_order import PostOrder
+from user.get_user_username import GetUsername
 from user.post_createwishlist import PostCreateWishlist
 from user.post_createwitharray import PostCreateWishArray
+from user.post_user import PostUser
+from user.put_user_username import PutUser
 
 
 @pytest.fixture()
@@ -70,6 +73,18 @@ def post_createwisharrey_endp():
     return PostCreateWishArray()
 
 @pytest.fixture()
+def post_user_endp():
+    return PostUser()
+
+@pytest.fixture()
+def get_username_endp():
+    return GetUsername()
+
+@pytest.fixture()
+def put_user_endp():
+    return PutUser()
+
+@pytest.fixture()
 def random_string(length=8):
     return ''.join(random.choices(string.ascii_letters, k=length))
 
@@ -117,3 +132,7 @@ def create_order_for_test(post_order_endp, random_id, random_id_order, current_s
     post_order_endp.post_order(random_id, random_id_order, current_ship_date)
     return post_order_endp
 
+@pytest.fixture()
+def create_user_for_test(post_user_endp, random_id, random_string, random_password, radom_email, random_phone):
+    post_user_endp.post_user(random_id, random_string, random_password, radom_email, random_phone)
+    return post_user_endp
