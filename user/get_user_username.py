@@ -1,5 +1,6 @@
 import requests
 from user.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class GetUsername(Endpoint):
     user_id = None
@@ -13,7 +14,7 @@ class GetUsername(Endpoint):
 
     def get_username(self, username):
         response = requests.get(
-            f'https://petstore.swagger.io/v2/user/{username}'
+            f'{BASE_URL}/user/{username}'
         )
         self.status = response.status_code
         self.user_id = response.json()['id']

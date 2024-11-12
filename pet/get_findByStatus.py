@@ -1,12 +1,13 @@
 import requests
 from pet.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class GetPetByStatus(Endpoint):
     pet_status = None
     pets = []
 
     def get_pet_by_status(self, pet_status):
-        url = 'https://petstore.swagger.io/v2/pet/findByStatus'
+        url = f'{BASE_URL}/pet/findByStatus'
         params = {
             'status': pet_status
         }

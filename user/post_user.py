@@ -1,12 +1,13 @@
 import requests
 from user.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PostUser(Endpoint):
 
     def post_user(self, random_id, random_string, random_password, radom_email, random_phone):
 
         response = requests.post(
-            'https://petstore.swagger.io/v2/user',
+            f'{BASE_URL}/user',
             headers={'Content-Type': 'application/json'},
             json={
                   "id": random_id,
@@ -21,4 +22,5 @@ class PostUser(Endpoint):
         )
         self.status = response.status_code
         self.username = random_string
+        self.password = random_password
         return response

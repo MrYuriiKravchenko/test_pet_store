@@ -1,5 +1,6 @@
 import requests
 from pet.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PostPetPetid(Endpoint):
     pet_id = None
@@ -7,7 +8,7 @@ class PostPetPetid(Endpoint):
     pet_status = None
 
     def post_pet_petid_store(self, pet_id, name, pet_status):
-        url = f'https://petstore.swagger.io/v2/pet/{pet_id}'
+        url = f'{BASE_URL}/pet/{pet_id}'
         data = {
             'name': name,
             'status': pet_status

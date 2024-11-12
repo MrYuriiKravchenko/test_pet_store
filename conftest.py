@@ -13,6 +13,9 @@ from store.delete_order_id import Delete
 from store.get_store_inventory import GetInventory
 from store.get_store_order_id import GetStoreOrderId
 from store.post_order import PostOrder
+from user.delete_user_username import DeleteUsername
+from user.get_user_login import GetLogin
+from user.get_user_logout import GetUserLogout
 from user.get_user_username import GetUsername
 from user.post_createwishlist import PostCreateWishlist
 from user.post_createwitharray import PostCreateWishArray
@@ -83,6 +86,18 @@ def get_username_endp():
 @pytest.fixture()
 def put_user_endp():
     return PutUser()
+
+@pytest.fixture()
+def delete_user_endp():
+    return DeleteUsername()
+
+@pytest.fixture()
+def get_login_user_endp():
+    return GetLogin()
+
+@pytest.fixture()
+def get_user_logout_endp():
+    return GetUserLogout()
 
 @pytest.fixture()
 def random_string(length=8):

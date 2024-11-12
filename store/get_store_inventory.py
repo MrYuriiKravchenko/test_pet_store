@@ -1,12 +1,13 @@
 import requests
 from store.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class GetInventory(Endpoint):
     response_json = None
 
     def get_inventory(self):
         response = requests.get(
-            'https://petstore.swagger.io/v2/store/inventory'
+            f'{BASE_URL}/store/inventory'
         )
         self.status = response.status_code
         self.response_json = response.json()

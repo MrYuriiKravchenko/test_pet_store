@@ -1,11 +1,12 @@
 import requests
 from user.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PutUser(Endpoint):
     def put_user(self, username, random_id, random_string, random_password, radom_email, random_phone):
 
         response = requests.put(
-            f'https://petstore.swagger.io/v2/user/{username}',
+            f'{BASE_URL}/user/{username}',
             json={
                   "id": random_id,
                   "username": random_string,

@@ -1,5 +1,6 @@
 import requests
 from store.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PostOrder(Endpoint):
     order_id = None
@@ -11,7 +12,7 @@ class PostOrder(Endpoint):
 
     def post_order(self, random_id, random_id_order, current_ship_date):
         response = requests.post(
-            'https://petstore.swagger.io/v2/store/order',
+            f'{BASE_URL}/store/order',
             headers={'Content-Type': 'application/json'},
             json={
                   "id": random_id_order,

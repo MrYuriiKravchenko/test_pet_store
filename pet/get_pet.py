@@ -1,11 +1,12 @@
 import requests
 from pet.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class GetPet(Endpoint):
     pet_id = None
     def get_pet(self, pet_id):
         response = requests.get(
-            f'https://petstore.swagger.io/v2/pet/{pet_id}',
+            f'{BASE_URL}/pet/{pet_id}',
             headers={'Content-Type': 'application/json'},
         )
         self.status = response.status_code

@@ -1,5 +1,6 @@
 import requests
 from user.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PostCreateWishArray(Endpoint):
     id_user = None
@@ -14,7 +15,7 @@ class PostCreateWishArray(Endpoint):
 
     def post_createwishlist(self, random_id, random_string, random_password, random_email, random_phone):
         response = requests.post(
-            'https://petstore.swagger.io/v2/user/createWithArray',
+            f'{BASE_URL}/user/createWithArray',
             headers={'Content-Type': 'application/json'},
             json=[
                 {

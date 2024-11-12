@@ -1,5 +1,6 @@
 import requests
 from store.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class GetStoreOrderId(Endpoint):
     order_id = None
@@ -10,7 +11,7 @@ class GetStoreOrderId(Endpoint):
 
     def get_order_id(self, order_id):
         response = requests.get(
-            f'https://petstore.swagger.io/v2/store/order/{order_id}'
+            f'{BASE_URL}/store/order/{order_id}'
         )
         self.status = response.status_code
         self.order_id = response.json()['id']

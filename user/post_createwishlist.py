@@ -1,5 +1,6 @@
 import requests
 from user.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PostCreateWishlist(Endpoint):
     id_user = None
@@ -14,7 +15,7 @@ class PostCreateWishlist(Endpoint):
 
     def post_createwishlist(self, random_id, random_string, random_password, random_email, random_phone):
         response = requests.post(
-            'https://petstore.swagger.io/v2/user/createWithList',
+            f'{BASE_URL}/user/createWithList',
             headers={'Content-Type': 'application/json'},
             json=[
                 {

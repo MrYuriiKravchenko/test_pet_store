@@ -1,5 +1,6 @@
 import requests
 from pet.endpoints_heandler import Endpoint
+from config.config import BASE_URL
 
 class PutPet(Endpoint):
     pet_id = None
@@ -12,7 +13,7 @@ class PutPet(Endpoint):
 
     def put_pet(self, pet_id, id_random, string_random, random_pet_status):
         response = requests.put(
-            'https://petstore.swagger.io/v2/pet',
+            f'{BASE_URL}/pet',
             headers={'Content-Type': 'application/json'},
             json={
                 "id": pet_id,
